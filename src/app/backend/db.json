@@ -1,0 +1,81 @@
+{
+  "employees": [
+    {
+      "id": "1b01",
+      "username": "pandu",
+      "mobile": "6767867862",
+      "email": "chodhans@gmail.com",
+      "aadhar": "332124324223",
+      "college": "vmr",
+      "branch": "eee",
+      "passedOutYear": "2019",
+      "hallTicket": "1342423432"
+    },
+    {
+      "id": "b7e1",
+      "username": "madhukumar",
+      "mobile": "5253535546",
+      "email": "madhu@gmail.com",
+      "aadhar": "552234324324",
+      "college": "bits",
+      "branch": "ecce",
+      "passedOutYear": 2019,
+      "hallTicket": "432432432"
+    },
+    {
+      "id": "d24f",
+      "username": "manoher",
+      "mobile": "7668368633",
+      "email": "manoher@gmail.com",
+      "aadhar": "343241123318",
+      "college": "svs",
+      "branch": "civil",
+      "passedOutYear": 2012,
+      "hallTicket": "4234325523"
+    },
+    {
+      "id": "92d3",
+      "username": "prudvi",
+      "mobile": "4324324322",
+      "email": "fsfasfa@gmailc.om",
+      "aadhar": "444324223123",
+      "college": "svs",
+      "branch": "eee",
+      "passedOutYear": 1030,
+      "hallTicket": "4412424324"
+    },
+    {
+      "id": "b74b",
+      "username": "sathwik",
+      "mobile": "5353525322",
+      "email": "sathwikakuthota10@gmail.com",
+      "aadhar": "444324223123",
+      "college": "vmr",
+      "branch": "civil",
+      "passedOutYear": 2032,
+      "hallTicket": "42342253332"
+    },
+    {
+      "username": "bhargavi enugula",
+      "mobile": "3333333333",
+      "email": "bhragavi@gmail.com",
+      "aadhar": "333333333333",
+      "college": "vmr",
+      "branch": "ece",
+      "passedOutYear": 2025,
+      "hallTicket": "33333333333",
+      "id": "62bd"
+    },
+    {
+      "id": "f2cb",
+      "username": "mmmmmmm",
+      "mobile": "44444444444",
+      "email": "mmmmmmmm@gmail.com",
+      "aadhar": "44444444444",
+      "college": "mmmmmmmmmm",
+      "branch": "mmm",
+      "passedOutYear": "4444",
+      "hallTicket": "4444444444"
+    }
+  ]
+}

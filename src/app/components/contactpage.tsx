@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
-
+import ReuseButton from './reusebutton';
+import AddEmployee from './addemployee';
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
@@ -22,7 +23,8 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="max-w-2xl mx-auto p-6 mt-10">
+    <>
+        <main className="max-w-2xl mx-auto p-6 mt-10">
       <h1 className="text-3xl font-bold mb-6 text-center">Contact Us</h1>
 
       {submitted ? (
@@ -77,5 +79,26 @@ export default function ContactPage() {
         </form>
       )}
     </main>
+
+ <div className="space-y-4 p-6">
+        <ReuseButton
+          label="Submit"
+          className="bg-blue-600 hover:bg-blue-700"
+          onClick={() => alert('Submit clicked!')}
+        />
+
+        <ReuseButton
+          label="Delete"
+          className="bg-red-500 hover:bg-red-600"
+          onClick={() => alert('Delete clicked!')}
+        />
+
+        <ReuseButton
+          label="Custom Button"
+          className="bg-purple-600 hover:bg-purple-700 text-sm"
+        />
+      </div>
+      
+    </>
   );
 }
