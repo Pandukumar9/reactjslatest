@@ -14,13 +14,14 @@ export type Column<T> = {
 };
 
 export interface Employee {
-  id?: number;
+  id?: number; // optional for "add" scenario
   username: string;
   mobile: string;
   email: string;
   aadhar: string;
   college: string;
   branch: string;
-  passedOutYear: number;
+  passedOutYear: string;
   hallTicket: string;
 }
+

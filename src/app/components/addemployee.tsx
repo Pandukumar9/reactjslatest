@@ -1,19 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-interface Employee {
-  id?: number;
-  username: string;
-  mobile: string;
-  email: string;
-  aadhar: string;
-  college: string;
-  branch: string;
-  passedOutYear: string;
-  hallTicket: string;
-}
+import { Employee } from '../models/types';
+import { addEmployee, updateEmployee } from '../utils/api';
 
 interface Props {
   initialData?: Employee;
@@ -22,6 +11,18 @@ interface Props {
 }
 
 export default function AddEmployee({ initialData, onSuccess, viewMode }: Props) {
+
+    const formFields = [ /* your form field loop remains unchanged */ 
+          ['username', 'Username'],
+          ['mobile', 'Mobile'],
+          ['email', 'Email'],
+          ['aadhar', 'Aadhar'],
+          ['college', 'College'],
+          ['branch', 'Branch'],
+          ['passedOutYear', 'Passed Out Year'],
+          ['hallTicket', 'Hall Ticket'],
+    ];
+    
   const [form, setForm] = useState<Employee>({
     username: '',
     mobile: '',
@@ -66,54 +67,60 @@ export default function AddEmployee({ initialData, onSuccess, viewMode }: Props)
     if (!validateForm()) return;
 
     try {
-      if (initialData) {
-        await axios.put(`http://localhost:3001/employees/${initialData.id}`, form);
+      if (initialData && initialData.id !== undefined) {
+           await updateEmployee(initialData.id, form);
       } else {
-        await axios.post('http://localhost:3001/employees', form);
-      }
+           await addEmployee(form);
+     }
       onSuccess();
     } catch (error) {
       console.error('Error submitting form:', error);
     }
   };
 
-  const inputStyle = (field: string) =>
+  const inputStyle = (field: string) => 
     `border px-3 py-2 rounded w-full ${errors[field] ? 'border-red-500' : ''} ${viewMode ? 'bg-gray-100' : ''}`;
 
-  return (
-    <form onSubmit={handleSubmit} className="space-y-4 p-4 w-full">
-      {[
-        ['username', 'Username'],
-        ['mobile', 'Mobile'],
-        ['email', 'Email'],
-        ['aadhar', 'Aadhar'],
-        ['college', 'College'],
-        ['branch', 'Branch'],
-        ['passedOutYear', 'Passed Out Year'],
-        ['hallTicket', 'Hall Ticket'],
-      ].map(([name, label]) => (
-        <div key={name}>
-          <label className="block font-medium">{label}</label>
-          <input
-            type="text"
-            name={name}
-            value={(form[name as keyof Employee] || '')}
-            onChange={handleChange}
-            disabled={viewMode}
-            className={inputStyle(name)}
-          />
-          {errors[name] && <p className="text-red-500 text-sm mt-1">{errors[name]}</p>}
-        </div>
-      ))}
+  const getTitle = () => {
+    if (viewMode) return 'View Employee';
+    if (initialData) return 'Edit Employee';
+    return 'Add Employee';
+  };
 
-      {!viewMode && (
-        <button
-          type="submit"
-          className="bg-green-600 text-white px-4 py-2 rounded"
-        >
-          {initialData ? 'Update Employee' : 'Add Employee'}
-        </button>
-      )}
-    </form>
+  return (
+    <div className="bg-white shadow-md rounded-lg overflow-hidden">
+      <div className="bg-gray-100 px-6 py-3 border-b">
+        <h2 className="text-xl font-semibold">{ getTitle() }</h2>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-4 p-4 w-full max-h-[400px] overflow-auto">
+      {
+         formFields.map(([name, label]) => (
+          <div key={name}>
+            <label className="block font-medium">{label}</label>
+            <input
+              type="text"
+              name={name}
+              value={(form[name as keyof Employee] || '')}
+              onChange={handleChange}
+              disabled={viewMode}
+              className={inputStyle(name)}
+            />
+            { 
+               errors[name] && <p className="text-red-500 text-sm mt-1">{ errors[name] }</p> 
+            }
+          </div>
+        ))
+      }
+
+      {
+        !viewMode && (
+          <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded">
+            { initialData ? 'Update Employee' : 'Add Employee' }
+          </button>
+        )
+      }
+      </form>
+    </div>
   );
 }

@@ -2,10 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import Users from '../components/users';
 import ReuseButton from '../components/reusebutton';
-import AddEmployee from '../components/addemployee';
-import EmployeeList from '../components/EmployeeList';
-import { fetchEmployees } from '../utils/api';
-import { Employee } from '../models/types';
 
 export interface User {
   id: number;
@@ -45,28 +41,6 @@ export default function ContactUs() {
       .then((res) => res.json())
       .then((data) => setUsers(data))
       .catch((err) => console.error('Error fetching users:', err));
-  }, []);
-
-
-  const [employees, setEmployees] = useState<Employee[]>([]);
-  const [loadingEmployees, setLoadingEmployees] = useState(false);
-  const [errorEmployees, setErrorEmployees] = useState<string | null>(null);
-
-  const loadEmployees = async () => {
-    setLoadingEmployees(true);
-    setErrorEmployees(null);
-    try {
-      const data = await fetchEmployees();
-      setEmployees(data);
-    } catch (error) {
-      setErrorEmployees((error as Error).message);
-    } finally {
-      setLoadingEmployees(false);
-    }
-  };
-
-  useEffect(() => {
-    loadEmployees();
   }, []);
 
   return (
@@ -125,17 +99,6 @@ export default function ContactUs() {
                  className="bg-purple-600 hover:bg-purple-700 text-sm"
                />
              </div>
-
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6 text-center">Employee Management</h1>
-
-      <AddEmployee onSuccess={loadEmployees} />
-
-      {loadingEmployees && <p className="text-center mt-4">Loading employees...</p>}
-      {errorEmployees && <p className="text-center text-red-500 mt-4">{errorEmployees}</p>}
-
-      <EmployeeList employees={employees} />
-    </div>
     </>
   );
 }

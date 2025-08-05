@@ -4,9 +4,9 @@ import { Employee } from '../models/types';
 export const API_URL = 'http://localhost:3001/employees';
 
 // fetchEmployees returns an array of employees from the response data
-export const fetchEmployees = async (): Promise<Employee[]> => {
+export const getEmployees = async (): Promise<Employee[]> => {
   const response = await axios.get<Employee[]>(API_URL);
-  return response.data; // unwrap data directly
+  return response.data;
 };
 
 // addEmployee returns the added employee from the response data
@@ -19,7 +19,7 @@ export const deleteEmployee = async (id: number): Promise<void> => {
   await axios.delete(`${API_URL}/${id}`);
 };
 
-export async function updateEmployee(id: number, data: any) {
+export async function updateEmployee(id: number, data: Employee) : Promise<Employee> {
   // Remove `id` from payload
   const { id: _, ...dataWithoutId } = data;
 

@@ -84,6 +84,7 @@ function NavLinks({ onLinkClick }: { onLinkClick: () => void }) {
       <Link href="/about" onClick={onLinkClick} className={linkStyle}>About</Link>
       <Link href="/product/123" onClick={onLinkClick} className={linkStyle}>Product 123</Link>
       <Link href="/routescomp/mainsection" onClick={onLinkClick} className={linkStyle}>Mainsec</Link>
+      <Link href="/routescomp/employeecrud" onClick={onLinkClick} className={linkStyle}>EmployeesData</Link>
     </>
   );
 }
